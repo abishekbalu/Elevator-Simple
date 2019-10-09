@@ -1,0 +1,6 @@
+
+# GIT IGNORE FILE FOR SIMULINK
+
+*.asv
+*.slxc
+slprj/
