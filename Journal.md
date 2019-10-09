@@ -1,0 +1,3 @@
+- [x] Add back all buttons
+- [ ] Set STOP functionality
+- [ ] Change colors for door
