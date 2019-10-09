@@ -1,8 +1,8 @@
 function try_p3(method, varargin)
 
-persistent flBtns fig floorHeight offStopColor;
-persistent offDoorColor onColor offColor axesH;
-persistent model;
+persistent flBtns fig floorHeight offStopColor onStopColor;
+persistent offDoorColor onColor offColor axesH numFloor;
+persistent model Stopbtn stop_val;
     switch method
         case 'init'
             
@@ -25,7 +25,7 @@ persistent model;
                             'YTick',[], ...
                             'Position',[0 1/8 1 7/8]);
             % Customize and setup floor,buttons,signs,elevator
-            model = 'a2_p3';
+            model = 'Copy_of_a2_p3';
             numFloor = 4;
             flBtns = zeros(numFloor, 1);
             offColor = 'w';
@@ -34,7 +34,7 @@ persistent model;
             onDoorColor= [1 0.3 0];
             onStopColor = [1 0.3 0];
             offStopColor = [0.6 0 0];
-            StopStatus = 0;
+            stop_val = 0;
             floorHeight = 700/numFloor;
             btnSize = 8;
             signSize = 10;
@@ -80,12 +80,51 @@ persistent model;
                                  'Position',[boxAxes boxY 1 boxHeight], ...
                                  'FaceColor','y', ...
                                  'LineWidth',1, ...
-                                 'EdgeColor','k');                
+                                 'EdgeColor','k'); 
+            Stopbtn = text( 'Parent',axesH, ...
+                            'Position',[190 30], ...
+                            'String','STOP', ...
+                            'BackgroundColor',offStopColor, ...
+                            'Color','w', ...
+                            'FontSize',8, ...
+                            'VerticalAlignment','bottom', ...
+                            'HorizontalAlignment','right', ...
+                            'EdgeColor','k', ...
+                            'ButtonDownFcn','try_p3 on stop');
+            Openbtn = text('Parent',axesH, ...
+                         'Position',[50 10], ...
+                         'String','OPEN', ...
+                         'BackgroundColor',offDoorColor, ...
+                         'Color','w', ...
+                         'FontSize',8, ...
+                         'VerticalAlignment','bottom', ...
+                         'HorizontalAlignment','right', ...
+                         'EdgeColor','k');     
         case 'on'
-                 fprintf("%d ", varargin{1});
+                 if(varargin{1} < numFloor)
                     actv = flBtns(varargin{1});
                     set(actv,'FaceColor',offColor);
                     set_param([model '/pressed'],'value',num2str(varargin{1}));
+                 end
+                 switch varargin{1}
+                     case 'stop'
+                         if (stop_val == 0)
+                             actv = Stopbtn;
+                             set(actv,'BackgroundColor',onStopColor);
+                             set_param([model '/stop'],'value','1');
+                             stop_val = 1;
+                         else
+                             try_p3('off','stop');
+                         end
+                 end
+        case 'off'
+            switch varargin{1}
+                case 'stop'
+                    actv = Stopbtn;
+                    set(actv,'BackgroundColor',offStopColor);
+                    set_param([model '/stop'],'value','0');
+                    stop_val = 0;
             end
+        end
     end
     
