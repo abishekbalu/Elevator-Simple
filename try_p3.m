@@ -101,7 +101,7 @@ persistent model Stopbtn stop_val;
                          'HorizontalAlignment','right', ...
                          'EdgeColor','k');     
         case 'on'
-                 if(varargin{1} < numFloor)
+                 if(varargin{1} <= numFloor)
                     actv = flBtns(varargin{1});
                     set(actv,'FaceColor',offColor);
                     set_param([model '/pressed'],'value',num2str(varargin{1}));
