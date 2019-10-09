@@ -1,8 +1,8 @@
 function try_p3(method, varargin)
 
 persistent flBtns fig floorHeight offStopColor onStopColor;
-persistent offDoorColor onColor offColor axesH numFloor;
-persistent model Stopbtn stop_val;
+persistent offDoorColor onDoorColor onColor offColor axesH numFloor;
+persistent model Stopbtn stop_val Openbtn;
     switch method
         case 'init'
             
@@ -31,7 +31,7 @@ persistent model Stopbtn stop_val;
             offColor = 'w';
             onColor = 'c';
             offDoorColor= 'k';
-            onDoorColor= [1 0.3 0];
+            onDoorColor= 'r'; %[1 0.3 0];
             onStopColor = [1 0.3 0];
             offStopColor = [0.6 0 0];
             stop_val = 0;
@@ -49,7 +49,7 @@ persistent model Stopbtn stop_val;
                 % Elevator request buttons
                 flBtns(f) = rectangle('Parent',axesH, ...
                                         'Position',[btnPosX btnPosY btnSize btnSize], ...
-                                        'FaceColor',onColor, ...
+                                        'FaceColor',offColor, ...
                                         'ButtonDownFcn',...
                                         ['try_p3(''on'',' num2str(f) ')']);
                % Floor number signs
@@ -103,7 +103,7 @@ persistent model Stopbtn stop_val;
         case 'on'
                  if(varargin{1} <= numFloor)
                     actv = flBtns(varargin{1});
-                    set(actv,'FaceColor',offColor);
+                    set(actv,'FaceColor',onColor);
                     set_param([model '/pressed'],'value',num2str(varargin{1}));
                  end
                  switch varargin{1}
@@ -125,6 +125,14 @@ persistent model Stopbtn stop_val;
                     set_param([model '/stop'],'value','0');
                     stop_val = 0;
             end
+        case 'open'
+            actv = Openbtn;
+            set(actv,'BackgroundColor',onDoorColor);
+            set_param([model '/door'],'value','0');
+        case 'close'
+            actv = Openbtn;
+            set(actv,'BackgroundColor',offDoorColor);
+            set_param([model '/door'],'value','1');
         end
     end
     
