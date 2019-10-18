@@ -25,7 +25,7 @@ persistent model Stopbtn stop_val Openbtn;
                             'YTick',[], ...
                             'Position',[0 1/8 1 7/8]);
             % Customize and setup floor,buttons,signs,elevator
-            model = 'Copy_of_a2_p3';
+            model = 'a2_p3_try05';
             numFloor = 4;
             flBtns = zeros(numFloor, 1);
             offColor = 'w';
@@ -105,6 +105,8 @@ persistent model Stopbtn stop_val Openbtn;
                     actv = flBtns(varargin{1});
                     set(actv,'FaceColor',onColor);
                     set_param([model '/pressed'],'value',num2str(varargin{1}));
+                    call_event = get_param([model '/call'],'value');
+                    set_param([model '/call'],'value',num2str(~str2double(call_event)));
                  end
                  switch varargin{1}
                      case 'stop'
@@ -133,6 +135,6 @@ persistent model Stopbtn stop_val Openbtn;
             actv = Openbtn;
             set(actv,'BackgroundColor',offDoorColor);
             set_param([model '/door'],'value','1');
-        end
+      end
     end
     
