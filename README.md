@@ -3,7 +3,7 @@
 Constructing a simple elevator with a UI. 
 Part of Assignment 2 of MBDES course at UU 
 
-Simulink models are not readable so for every change in model that's uploaded a comparision report will be added.
+Simulink models are not readable so for every change in model that's uploaded a comparision report (generated/manual comments) will be added.
 
 # Guidelines to make a comparision report
 
