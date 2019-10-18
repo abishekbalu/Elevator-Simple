@@ -3,3 +3,6 @@
 - [ ] Change colors for door
 - [x] use simulink parameter object to update stop value if suceed, use for door,floor : doesn't work
 - [ ] set OPEN functionality
+//////
+- [ ] Queue one single floor
+- [ ] Make queue function
