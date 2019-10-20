@@ -3,6 +3,9 @@
 - [ ] Change colors for door
 - [x] use simulink parameter object to update stop value if suceed, use for door,floor : doesn't work
 - [ ] set OPEN functionality
-//////
+----------------------------
 - [x] Queue one single floor
-- [ ] Make queue function
+- [x] Make queue function
+----------------------------
+- [ ] Display current position
+- [ ] move lift according to position
